@@ -316,3 +316,63 @@ footer {
     gap: 5px;
   }
 }
+.entry-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("../assets/images/park-bg.jpg") center/cover no-repeat;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeOut 3s ease 2s forwards;
+}
+.blossom-text {
+  font-size: 2rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  animation: slideDown 1.5s ease;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.logo-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bgm-toggle {
+  background: linear-gradient(45deg, #f1d28f, #e2b76e);
+  border: none;
+  color: white;
+  font-size: 1em;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.bgm-toggle:hover {
+  background: linear-gradient(45deg, #e2b76e, #d2a659);
+  transform: translateY(-2px);
+}
