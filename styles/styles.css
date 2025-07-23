@@ -376,3 +376,18 @@ footer {
   background: linear-gradient(45deg, #e2b76e, #d2a659);
   transform: translateY(-2px);
 }
+
+.logo {
+  font-size: 2.2rem; /* 필요시 더 줄일 수 있음 */
+  font-weight: bold;
+  color: #8b6914;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 48px;
+  width: auto;
+  margin-right: 12px;
+  vertical-align: middle;
+}
