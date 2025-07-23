@@ -1,11 +1,33 @@
-// 현재 시간 업데이트 함수 (사용처 확장 가능)
+// 현재 시간 업데이트 함수
 function updateTime() {
   const now = new Date();
   const timeStr = now.toLocaleString("ko-KR");
   // 향후 날짜 표시용 요소에 삽입 가능
 }
 
-// 페이지 로드 시 인사말 텍스트 삽입
+// ✅ 음악 버튼 상태 반영 함수
+function updateBGMButton(isPlaying) {
+  const btn = document.querySelector(".bgm-toggle");
+  if (btn) {
+    btn.textContent = isPlaying ? "🎵 음악 끄기" : "🎵 음악 켜기";
+  }
+}
+
+// ✅ BGM 토글 함수
+function toggleBGM() {
+  const bgm = document.getElementById("bgm");
+  if (bgm.paused) {
+    bgm.play();
+    localStorage.setItem("bgmState", "on");
+    updateBGMButton(true);
+  } else {
+    bgm.pause();
+    localStorage.setItem("bgmState", "off");
+    updateBGMButton(false);
+  }
+}
+
+// ✅ 인사말 + 자동 재생 시도
 window.onload = function () {
   const hour = new Date().getHours();
   let greeting = "안녕하세요";
@@ -25,55 +47,44 @@ window.onload = function () {
     blossomText.textContent = `${greeting}! 탑골공원에 오신 것을 환영합니다 😊`;
   }
 
-  // ✅ 배경음 자동 재생
   const bgm = document.getElementById("bgm");
-  const playPromise = bgm.play();
-  if (playPromise !== undefined) {
-    playPromise.catch((error) => {
-      console.log("자동 재생 차단됨: 사용자 상호작용 필요", error);
-    });
+  bgm.volume = 0.5;
+
+  const savedState = localStorage.getItem("bgmState");
+
+  if (savedState === "off") {
+    bgm.pause();
+    updateBGMButton(false);
+  } else {
+    const playPromise = bgm.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          updateBGMButton(true);
+          localStorage.setItem("bgmState", "on");
+        })
+        .catch((error) => {
+          console.log("자동 재생 차단됨. 사용자 상호작용 필요", error);
+        });
+    }
   }
 };
 
-// ✅ 음악 켜기/끄기 토글 함수
-function toggleBGM() {
-  const bgm = document.getElementById("bgm");
-  const btn = document.querySelector(".bgm-toggle");
-
-  if (bgm.paused) {
-    bgm.play();
-    btn.textContent = "🎵 음악 끄기";
-  } else {
-    bgm.pause();
-    btn.textContent = "🎵 음악 켜기";
-  }
-}
-
-// 바로가기 버튼 경고창 예시 (더 정교한 라우팅으로 확장 가능)
-function showAlert(msg) {
-  alert(msg);
-}
+// ✅ 사용자 첫 클릭으로 재생 보장 (브라우저 자동재생 제한 대응)
 window.addEventListener("DOMContentLoaded", function () {
   const bgm = document.getElementById("bgm");
 
-  function playBGM() {
-    if (bgm.paused) {
-      bgm.volume = 0.5; // 원하는 음량 조절 (0 ~ 1)
-      bgm.play().catch((err) => {
-        console.warn("BGM 재생 실패:", err);
-      });
+  function playBGMOnce() {
+    const savedState = localStorage.getItem("bgmState");
+    if (savedState !== "off" && bgm.paused) {
+      bgm.volume = 0.5;
+      bgm
+        .play()
+        .then(() => updateBGMButton(true))
+        .catch((err) => console.warn("BGM 재생 실패:", err));
     }
-    document.removeEventListener("click", playBGM);
+    document.removeEventListener("click", playBGMOnce);
   }
 
-  // 사용자 첫 클릭 이후에 BGM 시작
-  document.addEventListener("click", playBGM);
+  document.addEventListener("click", playBGMOnce);
 });
-function toggleBGM() {
-  const bgm = document.getElementById("bgm");
-  if (bgm.paused) {
-    bgm.play();
-  } else {
-    bgm.pause();
-  }
-}
