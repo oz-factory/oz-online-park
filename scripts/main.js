@@ -44,7 +44,7 @@ window.onload = function () {
   const blossomText = entryScreen.querySelector(".blossom-text");
 
   if (blossomText) {
-    blossomText.textContent = `${greeting}! 탑골공원에 오신 것을 환영합니다 😊`;
+    blossomText.textContent = `${greeting}! 탑골톡에 오신 것을 환영합니다 😊`;
   }
 
   const bgm = document.getElementById("bgm");
