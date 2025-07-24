@@ -81,7 +81,7 @@
       <div class="popular-posts">
         <div class="popular-title">🔥 인기 게시글</div>
         <div class="posts-container">
-          <div class="post-item">
+          <div class="post-item" onclick="alert('게시글을 확인하시겠습니까?')">
             <div class="post-header">
               <span class="post-category">💬 어르신 소식통</span>
               <span class="post-time">2시간 전</span>
@@ -91,32 +91,59 @@
               오늘 산책 나갔다가 찍은 사진인데 여러분도 보세요...
             </div>
             <div class="post-stats">
-              <span>👍 좋아요 24개</span> <span>💬 댓글 8개</span>
+              <span>👍 좋아요 24개</span>
+              <span>💬 댓글 8개</span>
             </div>
-            <div
-              class="post-item"
-              onclick="alert('게시글을 확인하시겠습니까?')"
-            >
-              <div class="post-header">
-                <span class="post-category">🏥 건강 이야기</span>
-                <span class="post-time">5시간 전</span>
-              </div>
-              <div class="post-title">무릎 아플 때 도움되는 간단한 운동법</div>
-              <div class="post-preview">
-                의사선생님께 들은 이야기인데 정말 효과가 있어요...
-              </div>
-              <div class="post-stats">
-                <span>👍 좋아요 31개</span>
-                <span>💬 댓글 12개</span>
-              </div>
+          </div>
+
+          <div class="post-item" onclick="alert('게시글을 확인하시겠습니까?')">
+            <div class="post-header">
+              <span class="post-category">🏥 건강 이야기</span>
+              <span class="post-time">5시간 전</span>
             </div>
+            <div class="post-title">무릎 아플 때 도움되는 간단한 운동법</div>
+            <div class="post-preview">
+              의사선생님께 들은 이야기인데 정말 효과가 있어요...
+            </div>
+            <div class="post-stats">
+              <span>👍 좋아요 31개</span>
+              <span>💬 댓글 12개</span>
+            </div>
+          </div>
+
+          <div class="post-item" onclick="alert('게시글을 확인하시겠습니까?')">
+            <div class="post-header">
+              <span class="post-category">🎭 추억의 무대</span>
+              <span class="post-time">1일 전</span>
+            </div>
+            <div class="post-title">
+              옛날 학교 다닐 때 불렀던 노래 기억나세요?
+            </div>
+            <div class="post-preview">
+              '학도가'라고 아시나요? 갑자기 생각나서...
+            </div>
+            <div class="post-stats">
+              <span>👍 좋아요 45개</span>
+              <span>💬 댓글 18개</span>
+            </div>
+          </div>
+        </div>
+        <div class="more-posts">
+          <button
+            class="more-btn"
+            onclick="alert('더 많은 게시글을 보시겠습니까?')"
+          >
+            더 많은 이야기 보기 →
+          </button>
+        </div>
+      </div>
             <!-- 음성추가 -->
             <button class="tts-btn" onclick="toggleSpeech(this)">
               📢 읽어주기
             </button>
-          </div>
-        </div>
-      </div>
+    
+     
+
 
       <div class="notice-board">
         <div class="notice-title">📢 탑골 소식</div>
@@ -131,6 +158,10 @@
         </div>
         <div class="notice-item">• 추억의 가요 신청곡을 받습니다</div>
       </div>
+      </div>
+         </div>
+             </div>
+
       <!-- 음성추가 -->
       <button class="read-selected" onclick="speakSelected()">
         선택한 텍스트 읽기
