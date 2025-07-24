@@ -93,6 +93,10 @@
             <div class="post-stats">
               <span>👍 좋아요 24개</span>
               <span>💬 댓글 8개</span>
+              <!-- 음성추가 -->
+              <button class="tts-btn" onclick="toggleSpeech(this)">
+                📢 읽어주기
+              </button>
             </div>
           </div>
 
@@ -108,6 +112,10 @@
             <div class="post-stats">
               <span>👍 좋아요 31개</span>
               <span>💬 댓글 12개</span>
+              <!-- 음성추가 -->
+              <button class="tts-btn" onclick="toggleSpeech(this)">
+                📢 읽어주기
+              </button>
             </div>
           </div>
 
@@ -125,6 +133,10 @@
             <div class="post-stats">
               <span>👍 좋아요 45개</span>
               <span>💬 댓글 18개</span>
+              <!-- 음성추가 -->
+              <button class="tts-btn" onclick="toggleSpeech(this)">
+                📢 읽어주기
+              </button>
             </div>
           </div>
         </div>
@@ -137,14 +149,6 @@
           </button>
         </div>
       </div>
-            <!-- 음성추가 -->
-            <button class="tts-btn" onclick="toggleSpeech(this)">
-              📢 읽어주기
-            </button>
-    
-     
-
-
       <div class="notice-board">
         <div class="notice-title">📢 탑골 소식</div>
         <div class="notice-item">
@@ -158,13 +162,10 @@
         </div>
         <div class="notice-item">• 추억의 가요 신청곡을 받습니다</div>
       </div>
-      </div>
-         </div>
-             </div>
 
-      <!-- 음성추가 -->
-      <button class="read-selected" onclick="speakSelected()">
-        선택한 텍스트 읽기
+      <!-- 음성추가: 떠다니는 버튼 -->
+      <button class="floating-tts" onclick="speakSelected()">
+        📢 선택한 텍스트 읽기
       </button>
 
       <footer>
@@ -173,86 +174,8 @@
       </footer>
     </div>
 
-    <script>
-      // 배경 음악 켜기/끄기
-      function toggleBGM() {
-        const bgm = document.getElementById("bgm");
-        const btn = document.querySelector(".bgm-toggle");
-        if (bgm.paused) {
-          bgm.play();
-          btn.textContent = "🎵 음악 끄기";
-        } else {
-          bgm.pause();
-          btn.textContent = "🎵 음악 켜기";
-        }
-      }
-
-      // 전역 상태 추적용 변수
-      let currentUtterance = null;
-
-      // 게시글 읽기 토글
-      function toggleSpeech(button) {
-        if (speechSynthesis.speaking) {
-          // 현재 읽는 중이면 중지
-          speechSynthesis.cancel();
-          button.textContent = "📢 읽어주기";
-          return;
-        }
-
-        // 읽을 텍스트 추출
-        const post = button.closest(".post-item");
-        const title = post.querySelector(".post-title").innerText;
-        const preview = post.querySelector(".post-preview").innerText;
-        const text = `${title}. ${preview}`;
-
-        // 음성 생성 및 설정
-        currentUtterance = new SpeechSynthesisUtterance(text);
-        currentUtterance.lang = "ko-KR";
-        currentUtterance.pitch = 1;
-        currentUtterance.rate = 1;
-
-        // 읽기 시작
-        speechSynthesis.speak(currentUtterance);
-        button.textContent = "⏹️ 멈추기";
-
-        // 끝나면 버튼 텍스트 복구
-        currentUtterance.onend = () => {
-          button.textContent = "📢 읽어주기";
-        };
-      }
-
-      // 선택한 텍스트 읽기
-      function speakSelected() {
-        const selectedText = window.getSelection().toString();
-        if (selectedText.trim() === "") {
-          alert("읽을 텍스트를 먼저 선택해주세요.");
-          return;
-        }
-
-        // 기존 읽기 중단
-        speechSynthesis.cancel();
-
-        const utterance = new SpeechSynthesisUtterance(selectedText);
-        utterance.lang = "ko-KR";
-        utterance.pitch = 1;
-        utterance.rate = 1;
-        speechSynthesis.speak(utterance);
-      }
-
-      // 첫 로딩 시 자동 음악 재생 시도
-      window.addEventListener("DOMContentLoaded", () => {
-        const bgm = document.getElementById("bgm");
-        document.addEventListener(
-          "click",
-          () => {
-            if (bgm.paused) {
-              bgm.volume = 0.5;
-              bgm.play().catch((err) => console.warn("자동 재생 차단됨:", err));
-            }
-          },
-          { once: true }
-        );
-      });
-    </script>
+    <script src="./scripts/main.js"></script>
+    <script src="./scripts/bgmControl.js"></script>
+    <script src="./scripts/ttsControl.js"></script>
   </body>
 </html>

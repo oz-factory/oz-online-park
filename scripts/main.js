@@ -88,3 +88,15 @@ window.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener("click", playBGMOnce);
 });
+function speakSelected() {
+  const selectedText = window.getSelection().toString();
+  if (selectedText.trim() === "") {
+    alert("읽을 텍스트를 먼저 선택해주세요.");
+    return;
+  }
+  const utterance = new SpeechSynthesisUtterance(selectedText);
+  utterance.lang = "ko-KR";
+  utterance.pitch = 1;
+  utterance.rate = 1;
+  speechSynthesis.speak(utterance);
+}

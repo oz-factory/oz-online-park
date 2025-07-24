@@ -394,12 +394,20 @@ footer {
 
 /* 음성부분 */
 .tts-btn {
-  margin-top: 10px;
-  background-color: #c5e1a5;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
+  margin-left: auto;
+  background-color: #f6f6f6;
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 14px;
   cursor: pointer;
+}
+.post-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .read-selected {
@@ -411,4 +419,24 @@ footer {
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
+}
+.floating-tts {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  padding: 12px 16px;
+  background-color: #fefefe;
+  color: #333;
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.floating-tts:hover {
+  background-color: #eaeaea;
+  border-color: #888;
 }
