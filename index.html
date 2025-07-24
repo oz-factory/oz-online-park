@@ -12,15 +12,17 @@
     </div>
     <div class="container">
       <audio id="bgm" src="./assets/sounds/bgm.mp3" loop></audio>
-     <header>
-  <div class="logo-container">
-    <div class="logo"><img src="tapgol.png">탑골톡</div>
-    <button onclick="toggleBGM()" class="bgm-toggle">🎵 음악 켜기/끄기</button>
-  </div>
-  <div class="weather-info">
-    ☀️ 오늘은 맑고 따뜻한 날씨입니다 (25°C) | 📅 2025년 7월 25일 금요일
-  </div>
-</header>
+
+      <header>
+        <div class="logo-container">
+          <div class="logo"><img src="tapgol.png" />탑골톡</div>
+          <button onclick="toggleBGM()" class="bgm-toggle">
+            🎵 음악 켜기/끄기
+          </button>
+        </div>
+        <div class="weather-info">
+          ☀️ 오늘은 맑고 따뜻한 날씨입니다 (25°C) | 📅 2025년 7월 25일 금요일
+        </div>
       </header>
 
       <div class="quick-access">
@@ -74,36 +76,12 @@
             옛날 가요와 트로트를 들으며<br />추억을 되새겨보세요
           </div>
         </div>
-
-        <div class="section-card" onclick="alert('생활 정보로 이동합니다')">
-          <span class="section-icon">📋</span>
-          <div class="section-title">생활 정보</div>
-          <div class="section-desc">
-            유용한 생활 정보와<br />정부 혜택을 알아보세요
-          </div>
-        </div>
-
-        <div class="section-card" onclick="alert('사진 앨범으로 이동합니다')">
-          <span class="section-icon">📸</span>
-          <div class="section-title">추억 앨범</div>
-          <div class="section-desc">
-            소중한 사진을 올리고<br />추억을 함께 나누세요
-          </div>
-        </div>
-
-        <div class="section-card" onclick="alert('동네 모임으로 이동합니다')">
-          <span class="section-icon">👥</span>
-          <div class="section-title">동네 모임</div>
-          <div class="section-desc">
-            가까운 이웃들과<br />모임을 만들어보세요
-          </div>
-        </div>
       </div>
 
       <div class="popular-posts">
         <div class="popular-title">🔥 인기 게시글</div>
         <div class="posts-container">
-          <div class="post-item" onclick="alert('게시글을 확인하시겠습니까?')">
+          <div class="post-item">
             <div class="post-header">
               <span class="post-category">💬 어르신 소식통</span>
               <span class="post-time">2시간 전</span>
@@ -113,50 +91,13 @@
               오늘 산책 나갔다가 찍은 사진인데 여러분도 보세요...
             </div>
             <div class="post-stats">
-              <span>👍 좋아요 24개</span>
-              <span>💬 댓글 8개</span>
+              <span>👍 좋아요 24개</span> <span>💬 댓글 8개</span>
             </div>
+            <!-- 음성추가 -->
+            <button class="tts-btn" onclick="toggleSpeech(this)">
+              📢 읽어주기
+            </button>
           </div>
-
-          <div class="post-item" onclick="alert('게시글을 확인하시겠습니까?')">
-            <div class="post-header">
-              <span class="post-category">🏥 건강 이야기</span>
-              <span class="post-time">5시간 전</span>
-            </div>
-            <div class="post-title">무릎 아플 때 도움되는 간단한 운동법</div>
-            <div class="post-preview">
-              의사선생님께 들은 이야기인데 정말 효과가 있어요...
-            </div>
-            <div class="post-stats">
-              <span>👍 좋아요 31개</span>
-              <span>💬 댓글 12개</span>
-            </div>
-          </div>
-
-          <div class="post-item" onclick="alert('게시글을 확인하시겠습니까?')">
-            <div class="post-header">
-              <span class="post-category">🎭 추억의 무대</span>
-              <span class="post-time">1일 전</span>
-            </div>
-            <div class="post-title">
-              옛날 학교 다닐 때 불렀던 노래 기억나세요?
-            </div>
-            <div class="post-preview">
-              '학도가'라고 아시나요? 갑자기 생각나서...
-            </div>
-            <div class="post-stats">
-              <span>👍 좋아요 45개</span>
-              <span>💬 댓글 18개</span>
-            </div>
-          </div>
-        </div>
-        <div class="more-posts">
-          <button
-            class="more-btn"
-            onclick="alert('더 많은 게시글을 보시겠습니까?')"
-          >
-            더 많은 이야기 보기 →
-          </button>
         </div>
       </div>
 
@@ -173,6 +114,10 @@
         </div>
         <div class="notice-item">• 추억의 가요 신청곡을 받습니다</div>
       </div>
+      <!-- 음성추가 -->
+      <button class="read-selected" onclick="speakSelected()">
+        선택한 텍스트 읽기
+      </button>
 
       <footer>
         <p>온라인 탑골공원은 어르신들의 편안한 소통공간입니다 💝</p>
@@ -180,6 +125,86 @@
       </footer>
     </div>
 
-    <script src="./scripts/main.js"></script>
+    <script>
+      // 배경 음악 켜기/끄기
+      function toggleBGM() {
+        const bgm = document.getElementById("bgm");
+        const btn = document.querySelector(".bgm-toggle");
+        if (bgm.paused) {
+          bgm.play();
+          btn.textContent = "🎵 음악 끄기";
+        } else {
+          bgm.pause();
+          btn.textContent = "🎵 음악 켜기";
+        }
+      }
+
+      // 전역 상태 추적용 변수
+      let currentUtterance = null;
+
+      // 게시글 읽기 토글
+      function toggleSpeech(button) {
+        if (speechSynthesis.speaking) {
+          // 현재 읽는 중이면 중지
+          speechSynthesis.cancel();
+          button.textContent = "📢 읽어주기";
+          return;
+        }
+
+        // 읽을 텍스트 추출
+        const post = button.closest(".post-item");
+        const title = post.querySelector(".post-title").innerText;
+        const preview = post.querySelector(".post-preview").innerText;
+        const text = `${title}. ${preview}`;
+
+        // 음성 생성 및 설정
+        currentUtterance = new SpeechSynthesisUtterance(text);
+        currentUtterance.lang = "ko-KR";
+        currentUtterance.pitch = 1;
+        currentUtterance.rate = 1;
+
+        // 읽기 시작
+        speechSynthesis.speak(currentUtterance);
+        button.textContent = "⏹️ 멈추기";
+
+        // 끝나면 버튼 텍스트 복구
+        currentUtterance.onend = () => {
+          button.textContent = "📢 읽어주기";
+        };
+      }
+
+      // 선택한 텍스트 읽기
+      function speakSelected() {
+        const selectedText = window.getSelection().toString();
+        if (selectedText.trim() === "") {
+          alert("읽을 텍스트를 먼저 선택해주세요.");
+          return;
+        }
+
+        // 기존 읽기 중단
+        speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(selectedText);
+        utterance.lang = "ko-KR";
+        utterance.pitch = 1;
+        utterance.rate = 1;
+        speechSynthesis.speak(utterance);
+      }
+
+      // 첫 로딩 시 자동 음악 재생 시도
+      window.addEventListener("DOMContentLoaded", () => {
+        const bgm = document.getElementById("bgm");
+        document.addEventListener(
+          "click",
+          () => {
+            if (bgm.paused) {
+              bgm.volume = 0.5;
+              bgm.play().catch((err) => console.warn("자동 재생 차단됨:", err));
+            }
+          },
+          { once: true }
+        );
+      });
+    </script>
   </body>
 </html>
