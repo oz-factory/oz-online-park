@@ -440,3 +440,130 @@ footer {
   background-color: #eaeaea;
   border-color: #888;
 }
+
+/* 추억 앨범 스타일 */
+.memory-album {
+  background: white;
+  border: 3px solid #e8d5b7;
+  border-radius: 20px;
+  padding: 25px;
+  margin: 30px 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.album-title {
+  color: #8b6914;
+  font-size: 1.4em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  background: linear-gradient(45deg, #f0e6d6, #e8d5b7);
+  padding: 10px;
+  border-radius: 15px;
+  border: 2px solid #d4b896;
+}
+
+.album-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.album-item {
+  background: #f9f7f4;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 2px solid #ede7e0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.album-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-color: #d4b896;
+}
+
+.album-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.album-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.album-item:hover .album-image img {
+  transform: scale(1.05);
+}
+
+.album-info {
+  padding: 15px;
+}
+
+.album-photo-title {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #8b6914;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.album-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9em;
+  color: #8b7355;
+}
+
+.album-author {
+  color: #6b5b3f;
+}
+
+.album-likes {
+  color: #d4572a;
+  font-weight: bold;
+}
+
+.album-more {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.more-btn {
+  background: linear-gradient(45deg, #8b6914, #b8860b);
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.more-btn:hover {
+  background: linear-gradient(45deg, #b8860b, #daa520);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .album-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .album-meta {
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+  }
+}
